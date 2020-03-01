@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<h3 id="head_text"></h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Vis</th>
+				<th>ReportedPercent</th>
+				<th>TruePercent</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="Vis1"></td>
+				<td id="input1"></td>
+				<td id="true1"></td>
+			</tr>
+			<tr>
+				<td id="Vis2"></td>
+				<td id="input2"></td>
+				<td id="true2"></td>
+			</tr>
+			<tr>
+				<td id="Vis3"></td>
+				<td id="input3"></td>
+				<td id="true3"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<script type="text/javascript">
+	$(function(){
+		var url = window.location.search;
+		var text = url.substr(1);
+		var params = text.split("&");
+		var s = new Object();
+		for(var i = 0; i < params.length; i++){
+			s[params[i].split("=")[0]] = unescape(params[i].split("=")[1]);
+		}
+		document.getElementById("head_text").innerHTML = "Final Result of " + s["name"];
+		document.getElementById("Vis1").innerHTML = s["Chart1"];
+		document.getElementById("input1").innerHTML = s["input1"];
+		document.getElementById("true1").innerHTML = s["true1"];
+		document.getElementById("Vis2").innerHTML = s["Chart2"];
+		document.getElementById("input2").innerHTML = s["input2"];
+		document.getElementById("true2").innerHTML = s["true2"];
+		document.getElementById("Vis3").innerHTML = s["Chart3"];
+		document.getElementById("input3").innerHTML = s["input3"];
+		document.getElementById("true3").innerHTML = s["true3"];
+	})
+</script>
