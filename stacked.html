@@ -103,10 +103,12 @@
 					.style("fill", "black");
 			})
 			function submitFunction(){
-				var name = escape("Jack")
+				var url = window.location.search;
+				var text = url.substr(1);
+				var name = unescape(text)
 				var Chart = escape(document.getElementById("ChartName").innerHTML);
 				input_value = document.getElementById("result").value;
-				window.location.href = "http://localhost:8000/bar.html?name=" + name + "&Chart1=" + Chart + "&input1=" + escape(input_value) + "&true1=" + escape(true_value);
+				window.location.href = "http://localhost:8000/bar.html?name=" + escape(name) + "&Chart1=" + Chart + "&input1=" + escape(input_value) + "&true1=" + escape(true_value);
 			}
 		</script>
 </body>
