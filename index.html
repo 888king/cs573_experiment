@@ -2,29 +2,33 @@
 
 <head>
 	<meta charset="utf-8">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-	<h3>Welcome</h3>
-	<div class = "container">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="input-group">
-					<input type="text" id="name" placeholder="please enter your name">
-				</div>
-			</div>
-			<div class="col-md-2">
-				<button onclick="submitFunction()" class="btn btn-primary">Next</button>
+<body style="text-align: center;">
+	<div style="margin: 0 auto;">
+		<div>
+			<h3>Welcome</h3>
+		</div>
+		<div style="text-align: center;">
+			<div style="margin: 0 auto;">
+				<input type="text" id="name" placeholder="please enter your name">
+				<button onclick="submitFunction()">Next</button>
 			</div>
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-	function submitFunction(){
-		var user_name = escape(document.getElementById("name").value);
-		window.location.href = "https://888king.github.io/cs573_experiment/stacked.html?" + user_name;
+<script>
+	function submitFunction() {
+		var plot_index = new Array(60);
+		plot_index.fill(0, 0, 20);
+		plot_index.fill(1, 20, 40);
+		plot_index.fill(2, 40, 60);
+		plot_index = d3.shuffle(plot_index);
+		var user_name = document.getElementById("name").value;
+		localStorage.setItem("plot_index", plot_index);
+		localStorage.setItem("user_name", user_name);
+		window.location.href = "./plot.html";
 	}
 </script>

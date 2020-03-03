@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body style="text-align: center;">
+	<div style="margin: 0 auto;">
+		<h3>Thank you!</h3>
+	</div>
+	<div style="text-align: center;">
+		<div style="margin: 0 auto;">
+			<button onclick="save()">Save</button>
+			<p id="status">Please click Save button to save your result.</p>
+		</div>
+	</div>
+</body>
+
+<script>
+	function save(){
+		var data={
+			'plot_index': localStorage.getItem("plot_index"),
+			'input_values': localStorage.getItem("input_values"),
+			'true_values': localStorage.getItem("true_values")
+		};
+		var jsonfile = JSON.stringify(data);
+		download(jsonfile, "results.json");
+		document.getElementById("status").innerHTML = "Your result has been saved."
+
+	}
+	function download(content, filename){
+		var a = document.createElement("a");
+		var file = new Blob([content], {type: "text/plain"});
+		a.href = URL.createObjectURL(file);
+		a.download = filename;
+		a.click();
+	}
+</script>

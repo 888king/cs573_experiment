@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="./js/bar.js"></script>
+	<script src="./js/pie.js"></script>
+	<script src="./js/stackedbar.js"></script>
+</head>
+
+<body style="text-align: center;">
+	<div style="margin: 0 auto;">
+		<div>
+			<h3 id="current_plot"></h3>
+		</div>
+		<div id="plot">
+		</div>
+		<p>
+			There are two selected values are marked with dots in the plot.<br>
+			What is the percent of the smaller value to the larger value?<br>
+			Plese put your answer below. Your answer should range from 0 to 100.
+		</p>
+		<div style="text-align: center;">
+			<div style="margin: 0 auto;">
+				<input type="text" id="input_value">
+				<button id="input_button" onclick="next_plot()">Next</button>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	var true_values = [];
+	var input_values = [];
+	var num = 0;
+	var plot_indexes = localStorage.getItem("plot_index");
+	console.log(plot_indexes);
+	var header = document.getElementById("current_plot");
+	var input = document.getElementById("input_value");
+
+	input.focus();
+	input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("input_button").click();
+        }
+    });
+
+	header.innerHTML = (num+1) + "/" + 60;
+	var true_value = plot(plot_indexes[num]);
+	console.log(plot_indexes[num]);
+	true_values.push(true_value);
+	num++;
+	console.log(plot_indexes.length);
+
+	function next_plot(){
+		input_values.push(input.value);
+
+		if(2 * num > plot_indexes.length){
+			localStorage.setItem("true_values", true_values);
+			localStorage.setItem("input_values", input_values);
+			console.log(true_values);
+			console.log(input_values);
+			window.location.href = "./end.html";
+		}
+		else{
+			true_value = plot(plot_indexes[2 * num]);
+			true_values.push(true_value);
+			header.innerHTML = (num+1) + "/" + 60;
+			input.value = "";
+			num++;
+		}
+	}
+
+	function plot(plot_index) {
+		d3.select("svg").remove();
+		console.log("11111111");
+		if(plot_index == 0)
+			return bar();
+		else if(plot_index == 1)
+			return pie();
+		else if(plot_index == 2)
+			return stackedbar();
+	}
+</script>
